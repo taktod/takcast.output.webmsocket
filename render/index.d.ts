@@ -18,5 +18,7 @@ export declare class WebmSocket implements IOutputPlugin {
      * @param media
      */
     onRemoveMedia(media: IMediaPlugin): void;
+    _startPublish(address: string): void;
+    _finishPublish(): void;
 }
 export declare var _: WebmSocket;

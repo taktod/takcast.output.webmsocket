@@ -13,7 +13,7 @@ export class WebmSocket implements IOutputPlugin {
    * 下部の設定コンポーネントを参照
    */
   public refSettingComponent():React.ComponentClass<{}> {
-    return settingComponent();
+    return settingComponent(this);
   }
   /**
    * 有効になっているmediaPluginが変更になったときの動作
@@ -25,6 +25,12 @@ export class WebmSocket implements IOutputPlugin {
    * @param media
    */
   public onRemoveMedia(media:IMediaPlugin):void {
+  }
+  public _startPublish(address:string) {
+
+  }
+  public _finishPublish() {
+
   }
 }
 

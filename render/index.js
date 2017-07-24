@@ -10,7 +10,7 @@ var WebmSocket = (function () {
      * 下部の設定コンポーネントを参照
      */
     WebmSocket.prototype.refSettingComponent = function () {
-        return settingComponent_1.settingComponent();
+        return settingComponent_1.settingComponent(this);
     };
     /**
      * 有効になっているmediaPluginが変更になったときの動作
@@ -22,6 +22,10 @@ var WebmSocket = (function () {
      * @param media
      */
     WebmSocket.prototype.onRemoveMedia = function (media) {
+    };
+    WebmSocket.prototype._startPublish = function (address) {
+    };
+    WebmSocket.prototype._finishPublish = function () {
     };
     return WebmSocket;
 }());

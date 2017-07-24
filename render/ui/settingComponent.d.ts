@@ -1,7 +1,14 @@
 /// <reference types="react" />
 import * as React from "react";
-export declare var settingComponent: () => {
+import { WebmSocket } from "..";
+export declare var settingComponent: (webmsocket: WebmSocket) => {
     new (): {
+        state: {
+            sending: boolean;
+            size: number;
+            time: number;
+        };
+        togglePublish(): void;
         render(): JSX.Element;
         setState<K extends never>(f: (prevState: {}, props: {}) => Pick<{}, K>, callback?: () => any): void;
         setState<K extends never>(state: Pick<{}, K>, callback?: () => any): void;
@@ -9,7 +16,6 @@ export declare var settingComponent: () => {
         props: Readonly<{
             children?: React.ReactNode;
         }> & Readonly<{}>;
-        state: Readonly<{}>;
         context: any;
         refs: {
             [key: string]: React.ReactInstance;
