@@ -14,6 +14,7 @@ export declare class WebmSocket implements IOutputPlugin {
     private targetMedia;
     private basePlugin;
     private event;
+    private recorder;
     private startTime;
     private publishSize;
     private ws;
@@ -38,7 +39,7 @@ export declare class WebmSocket implements IOutputPlugin {
      * @param media
      */
     onRemoveMedia(media: IMediaPlugin): void;
-    _startPublish(event: PublishEventListener, address: string): void;
+    _startPublish(event: PublishEventListener, address: string): boolean;
     _finishPublish(): void;
 }
 export declare var _: WebmSocket;
