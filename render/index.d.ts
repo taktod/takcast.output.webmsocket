@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
+import { IPlugin } from "takcast.interface";
 import { IOutputPlugin } from "takcast.interface";
 import { IMediaPlugin } from "takcast.interface";
 export interface PublishEventListener {
@@ -9,6 +10,21 @@ export interface PublishEventListener {
 export declare class WebmSocket implements IOutputPlugin {
     name: string;
     type: string;
+    private activeMedia;
+    private targetMedia;
+    private basePlugin;
+    private event;
+    private startTime;
+    private publishSize;
+    private ws;
+    constructor();
+    /**
+     * setPluginで全pluginの通知をおこなって、baseのpluginを取得しておく。
+     * @param plugins
+     */
+    setPlugins(plugins: {
+        [key: string]: Array<IPlugin>;
+    }): void;
     /**
      * 下部の設定コンポーネントを参照
      */
