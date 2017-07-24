@@ -3,13 +3,14 @@ import * as ReactDOM from "react-dom";
 import * as ReactBootstrap from "react-bootstrap";
 
 import {WebmSocket} from "..";
+import {PublishEventListener} from "..";
 
 var Navbar = ReactBootstrap.Navbar;
 var Button = ReactBootstrap.Button;
 var FormControl = ReactBootstrap.FormControl;
 
 export var settingComponent = (webmsocket:WebmSocket) => {
-  return class SettingComponent extends React.Component<{}, {}> {
+  return class SettingComponent extends React.Component<{}, {}> implements PublishEventListener{
     // とりあえず通信状態と送信データサイズ、経過時間をstateで持っとく
     state = {
       sending:false,
@@ -18,6 +19,7 @@ export var settingComponent = (webmsocket:WebmSocket) => {
     }
     constructor() {
       super();
+      this.togglePublish = this.togglePublish.bind(this);
     }
     public togglePublish() {
       // このアドレスに向かって配信を開始するという動作が必要になる。
@@ -25,10 +27,16 @@ export var settingComponent = (webmsocket:WebmSocket) => {
         webmsocket._finishPublish();
       }
       else {
-        if(webmsocket._startPublish((ReactDOM.findDOMNode(this.refs.address) as HTMLInputElement).value)) {
+        if(webmsocket._startPublish(this, (ReactDOM.findDOMNode(this.refs.address) as HTMLInputElement).value)) {
           this.setState({sending: true});
         } 
       }
+    }
+    public onProcess(info) {
+      this.setState(info);
+    }
+    public onStop() {
+      this.setState({sending: false});      
     }
     public render() {
       return (
@@ -43,7 +51,7 @@ export var settingComponent = (webmsocket:WebmSocket) => {
               />
             </Navbar.Text>
             <Navbar.Text>
-              <Button active={this.state.sending == true}><span className="glyphicon glyphicon-send" aria-hidden="true"></span></Button>
+              <Button onClick={this.togglePublish} active={this.state.sending == true}><span className="glyphicon glyphicon-send" aria-hidden="true"></span></Button>
             </Navbar.Text>
             <Navbar.Text>
               <br />

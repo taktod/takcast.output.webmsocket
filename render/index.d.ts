@@ -2,6 +2,10 @@
 import * as React from "react";
 import { IOutputPlugin } from "takcast.interface";
 import { IMediaPlugin } from "takcast.interface";
+export interface PublishEventListener {
+    onStop(): any;
+    onProcess(info: any): any;
+}
 export declare class WebmSocket implements IOutputPlugin {
     name: string;
     type: string;
@@ -18,7 +22,7 @@ export declare class WebmSocket implements IOutputPlugin {
      * @param media
      */
     onRemoveMedia(media: IMediaPlugin): void;
-    _startPublish(address: string): void;
+    _startPublish(event: PublishEventListener, address: string): void;
     _finishPublish(): void;
 }
 export declare var _: WebmSocket;

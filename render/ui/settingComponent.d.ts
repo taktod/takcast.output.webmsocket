@@ -9,6 +9,8 @@ export declare var settingComponent: (webmsocket: WebmSocket) => {
             time: number;
         };
         togglePublish(): void;
+        onProcess(info: any): void;
+        onStop(): void;
         render(): JSX.Element;
         setState<K extends never>(f: (prevState: {}, props: {}) => Pick<{}, K>, callback?: () => any): void;
         setState<K extends never>(state: Pick<{}, K>, callback?: () => any): void;

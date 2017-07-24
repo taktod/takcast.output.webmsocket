@@ -27,6 +27,7 @@ exports.settingComponent = function (webmsocket) {
                 size: 0,
                 time: 0
             };
+            _this.togglePublish = _this.togglePublish.bind(_this);
             return _this;
         }
         SettingComponent.prototype.togglePublish = function () {
@@ -35,10 +36,16 @@ exports.settingComponent = function (webmsocket) {
                 webmsocket._finishPublish();
             }
             else {
-                if (webmsocket._startPublish(ReactDOM.findDOMNode(this.refs.address).value)) {
+                if (webmsocket._startPublish(this, ReactDOM.findDOMNode(this.refs.address).value)) {
                     this.setState({ sending: true });
                 }
             }
+        };
+        SettingComponent.prototype.onProcess = function (info) {
+            this.setState(info);
+        };
+        SettingComponent.prototype.onStop = function () {
+            this.setState({ sending: false });
         };
         SettingComponent.prototype.render = function () {
             return (React.createElement("div", null,
@@ -46,7 +53,7 @@ exports.settingComponent = function (webmsocket) {
                     React.createElement(Navbar.Text, null,
                         React.createElement(FormControl, { type: "text", placeholder: "Enter address", ref: "address", disabled: this.state.sending })),
                     React.createElement(Navbar.Text, null,
-                        React.createElement(Button, { active: this.state.sending == true },
+                        React.createElement(Button, { onClick: this.togglePublish, active: this.state.sending == true },
                             React.createElement("span", { className: "glyphicon glyphicon-send", "aria-hidden": "true" }))),
                     React.createElement(Navbar.Text, null,
                         React.createElement("br", null),

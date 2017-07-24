@@ -6,6 +6,13 @@ import {IMediaPlugin} from "takcast.interface";
 
 import {settingComponent} from "./ui/settingComponent";
 
+export interface PublishEventListener {
+  // おわったとき
+  onStop();
+  // 中途のデータ
+  onProcess(info);
+}
+
 export class WebmSocket implements IOutputPlugin {
   public name = "webmsocket";
   public type = "output";
@@ -26,7 +33,7 @@ export class WebmSocket implements IOutputPlugin {
    */
   public onRemoveMedia(media:IMediaPlugin):void {
   }
-  public _startPublish(address:string) {
+  public _startPublish(event:PublishEventListener, address:string) {
 
   }
   public _finishPublish() {

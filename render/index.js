@@ -23,7 +23,7 @@ var WebmSocket = (function () {
      */
     WebmSocket.prototype.onRemoveMedia = function (media) {
     };
-    WebmSocket.prototype._startPublish = function (address) {
+    WebmSocket.prototype._startPublish = function (event, address) {
     };
     WebmSocket.prototype._finishPublish = function () {
     };
