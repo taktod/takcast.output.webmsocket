@@ -11,6 +11,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var ReactBootstrap = require("react-bootstrap");
+var Navbar = ReactBootstrap.Navbar;
+var Button = ReactBootstrap.Button;
+var FormControl = ReactBootstrap.FormControl;
 exports.settingComponent = function () {
     return (function (_super) {
         __extends(SettingComponent, _super);
@@ -18,7 +22,16 @@ exports.settingComponent = function () {
             return _super.call(this) || this;
         }
         SettingComponent.prototype.render = function () {
-            return (React.createElement("div", null));
+            return (React.createElement("div", null,
+                React.createElement("div", null,
+                    React.createElement(Navbar.Text, null,
+                        React.createElement(FormControl, { type: "text", placeholder: "Enter address", ref: "address" })),
+                    React.createElement(Navbar.Text, null,
+                        React.createElement(Button, null,
+                            React.createElement("span", { className: "glyphicon glyphicon-send", "aria-hidden": "true" }))),
+                    React.createElement(Navbar.Text, null,
+                        React.createElement("br", null),
+                        "00:00 / 10.0 KB"))));
         };
         return SettingComponent;
     }(React.Component));
